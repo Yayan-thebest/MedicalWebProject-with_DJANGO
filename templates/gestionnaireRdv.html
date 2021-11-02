@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+
+{% load static %}
+{% include 'navbar.html'%}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+<html>
+<head>
+	<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width initial-scale=1.0">
+
+    <title>Clinique Siante Bernadette</title>
+    <link  type="text/css" rel="stylesheet" href="{% static 'new-style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <!--Lien Font familly-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Lien pour les icones-->
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+     <!--Lien pour les icones-->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <link  type="text/css" rel="stylesheet" href="{% static 'css/main.css' %}">
+
+
+
+
+
+</head>
+
+
+
+<body  class="body-background-color">
+
+<h2 class="titre-dashboard">Gestionnaire de rendez-vous</h2>
+  <section class="cards-dashboard">
+
+
+        <div class="row">
+
+            <div class="cards-dashboard-col" style="background: #fff;">
+                <h3><i class="fa fa-hospital-o"></i>
+                  <span class="dottedBorder">Rendez-vous total</span>
+                </h3>
+                 <h2 class="headingStatut">{{rdvTotal}}</h2> 
+                 
+            </div>
+            <div class="cards-dashboard-col" style="background: #fff;">
+                <h3><i class="fa fa-user-md"></i>
+                   <span class="dottedBorder">Rendez-vous a traiter</span>
+                </h3>
+                <h2 class="headingStatut">{{rdvTotal}}</h2> 
+
+            </div>
+            <div class="cards-dashboard-col" style="background: #fff;">
+                <h3><i class="las la-chart-line"></i> 
+                  <span class="dottedBorder">Rendez-vous confirmer</span>
+                </h3>
+                <h2 class="headingStatut">{{rdvTotalConfirmer}}</h2>                    
+
+            </div>
+        </div>
+        
+    </section>
+
+
+    <div class="table-wrapper">
+        <div class="search-container">
+            <form method="GET" action="" id="search"  >       {% csrf_token %}<!--obligaoirelorsqu'on utilise un form, securise les données pour les envoyés dans la db-->
+              <input type="text"name="searchBarGestionRdv" placeholder="Faire une recherche..." >
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <table class="fl-table">
+          <thead>
+            <tr>
+             <th>RDV</th>
+             <th>ID PATIENT</th>
+             <th>NOM PATIENT</th>
+             <th>CONSULTATION</th>
+             <th>DATE</th>
+             <th>A</th>
+             <th>Avec Docteur </th>
+             <th>A PAYER</th>
+             <th>STATUT</th>
+            </tr>
+
+          </thead>
+          <tbody>
+          <tr>
+             {% for historique in queryRdv %}
+              <tr>
+                 <td><a href="{% url 'confirmerRdv' pk=historique.id patientId=historique.identifiant %}">#{{historique.id}}</a></td>
+                  <td><a href="{% url 'confirmerRdv' pk=historique.id patientId=historique.identifiant %}">{{historique.identifiant}}</a></td>
+
+                  <td><a href="{% url 'confirmerRdv' pk=historique.id patientId=historique.identifiant %}">{{historique.patient}}</a></td>
+                  <td>{{historique.consultation}}</td>
+                  <td>{{historique.horaireConsultation}}</td> 
+                  <td>{{historique.heure}}</td> 
+                  {%if historique.heure is None %}
+                      <td>-------</td> 
+                  {%else%}
+                     <td>{{historique.avecDocteur}}</td> 
+                  {%endif%}
+                  <td>{{historique.aPayer}}</td>
+                  {%if historique.statutRdv == 'Non Confirmer' %}
+                     <td class="" > {{historique.statutRdv}}</td>
+                  {%elif historique.statutRdv == 'Annuler' %}
+                      <td ><i class="fa fa-times-circle" style="color: red;"></i>{{historique.statutRdv}}</td>                           
+                  {%elif historique.statutRdv == 'En traitement' %}
+                     <td > {{historique.statutRdv}}</td>
+                  {%elif historique.statutRdv == '---------' %}
+                     <td >---------</td>
+
+                  {%else%}
+                      <td class=""><i class="fa fa-check-circle" style="color:#0ead69; " ></i> {{historique.statutRdv}}</td>
+
+                  {%endif%}
+
+            {%endfor %}
+          </tr>
+            <tbody>
+        </table>
+    </div>
+  
+
+</body>
+
+<script type="text/javascript">
+      const searchForm = document.getElementById('search-form')
+
+    searchForm.addEventListener('submit', e=>{
+    e.preventDefault()
+
+  })
+
+</script>
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+
+</html>

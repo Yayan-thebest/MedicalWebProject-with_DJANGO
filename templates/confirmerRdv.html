@@ -1,0 +1,134 @@
+
+{% include 'navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+<!DOCTYPE html>
+
+
+
+<html>
+	<head>
+    <meta charset="utf-8">
+
+    <!--Permet de rendre la page responsive-->
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+
+    <title>Clinique Siante Bernadette</title>
+    <link  type="text/css" rel="stylesheet" href="{% static 'new-style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <!--Lien Font familly-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Lien pour les icones-->
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+   <!-- semantic UI -->
+    <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+
+</head>
+
+   
+
+<body >
+
+
+<section class="cards-dashboard-confirmerRdv">
+  <div class="title-header">
+          <h2  >{{title}} </h2>
+            <b >Patient : </b>  <span > {{queryRdvInfoPatient.patient}}  </span>&nbsp;
+            <b >Consultation : </b>  <span > {{queryRdvInfoPatient.consultation}}  </span>&nbsp;          
+            <b >Date : </b>  <span>  {{queryRdvInfoPatient.horaireConsultation }}  </span>&nbsp;
+
+ </div>
+        <div class="row">
+          <div class="cards-dashboard-confirmerRdv-col">
+   
+         <form method="POST" action="">
+          {% csrf_token %}<!--a ajouter avec form, securise les données pour les envoyés dans la db-->
+                <p style="width: 700px; color: red;"></p>
+                <p><b class="block-align">Statut du rendez-vous</b>  <span class="input-confirmerRdv"> {{ form.statutRdv }}</span></p>
+                <p><b class="block-align">Heure rendez-vous</b>  <span class="input-confirmerRdv"> {{ form.heure }}</span></p>
+                <p><b class="block-align">Avec Docteur </b>  <span class="input-confirmerRdv"> {{ form.avecDocteur }}</span></p>
+
+          <br> <button type="submit" class="btn-submit"> Enregistrer</button><br>                   
+        </form>
+        </div>
+
+     
+      </div>
+</section>
+ <section class="section-text-with-image">
+        <h3>Historique des rendez-vous </h3>
+
+
+        <table class="fl-table">
+
+          <thead>
+            <tr>
+                <th>Rdv</th>
+                <th>Consultation</th>
+                <th>Date </th>
+                <th>A </th>
+                <th>Avec Docteur </th>
+                <th>A payer</th>                 
+                <th>Statut</th>
+            </tr>
+
+          </thead>
+          <tbody>
+          <tr>
+                 {% for historique in historiqueRdvPatient %}                       
+                          <tr>
+                            <td>#{{historique.id}}</td>
+                            <td>{{historique.consultation}}</td>
+                            <td>{{historique.horaireConsultation}}</td>                             
+                            <td>{{historique.heure}}</td>                           
+                            <td>{{historique.avecDocteur}}</td> 
+                            <td>{{historique.aPayer}}</td>
+                            <td>{{historique.statutRdv}}</td>
+
+                            
+                          </tr>
+                    {%endfor %}
+          </tr>
+            <tbody>
+        </table>   <br>
+
+                <h3>Informations sur le patient</h3>
+    
+
+            <div class="jumborton-left-text">
+                  <p> <b class="block-align">Nom complet  </b>  <span >{{queryInfoPatient.nom}} {{queryInfoPatient.prenom}}</span></p>
+
+                  <hr> 
+                    <p><b class="block-align">Sexe</b>  <span > {{queryInfoPatient.sexe}}</span></p>
+
+                  <hr>
+                      <p><b class="block-align">Email</b> <span >{{queryInfoPatient.email}} </span></p>
+                  <hr>
+                      <p><b class="block-align">Contact</b> <span > {{queryInfoPatient.tel}} </span></p>
+                  <hr>
+                      <p><b class="block-align">Date de naissance</b>  <span >  {{queryInfoPatient.dateNaissance}} </span></p>
+                  <hr>
+                      <p><b class="block-align">Addresse</b> <span >   {{queryInfoPatient.adresse}} </span></p>
+                  <hr>
+                      <p><b class="block-align">Date d'inscription</b><span >    {{queryInfoPatient.created_at}} </span></p>
+
+            </div>
+    </section>
+
+
+
+
+</body>
+
+
+
+
+</html>

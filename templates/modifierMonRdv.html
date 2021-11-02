@@ -1,0 +1,267 @@
+{% include 'navbarAdmin.html' %}
+<!DOCTYPE html> {% load static %} {% load crispy_forms_tags %} {% load crispy_forms_filters %} <html>
+  <head>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <title>Clinique Sainte Bernadette</title>
+      <!-- lien BS -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <!-- lien icones -->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+      <title>Clinique Sainte Bernadette</title>
+      <!-- icon -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+      <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+      <!-- Custom styles for our template -->
+      <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}" media="screen">
+      <link type="text/css" rel="stylesheet" href="{% static 'css/main.css' %}">
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Inter&family=Mukta:wght@200;300&display=swap" rel="stylesheet">
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- jquery -->
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <!-- semantic UI -->
+      <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    </head>
+
+  <body class="body-background-color">
+    <main role="main" class="container">
+      <div id='alert-box'></div>
+      <div class="jumbotron" id="jumbotron-color" style="margin-top: 30px; padding-left: 150px;">
+        <h2 style="color: black;">Modifier mon rendez-vous  </h2>
+        <br>
+        <div class="smallJumbotron" style="background-color:  #F8F8F8; ">
+          <span>
+            <b>Résumer du rendez-vous :</b>
+            <input type="hidden" value="{{query_modifierRdv.consultation}}" id='nomConsultationAModifier' class="patient">
+            <input type="hidden" value="{{query_modifierRdv.id}}" id='idConsultationAModifier'>
+            <br>
+            <ul> #Numéro rendez-vous : {{query_modifierRdv.id}} </ul>
+            <ul> Consultation : {{query_modifierRdv.consultation}} </ul>
+            <ul> Date : {{query_modifierRdv.date}} à {{query_modifierRdv.heure}} </ul>
+            <ul> Avec : Dr. {{query_modifierRdv.avecDocteur}} </ul>
+          </span>
+          <br>
+        </div>
+        <i id="titre-radio">Choisir une option :</i>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-md-3" id="bloc-radio1">
+            <input type="radio" id="radio_modifierRdv" name="radio_modifierRdv" value="Payer a l'arriver" style="vertical-align: inherit; ">
+            <label for="payeAfter">Modifier la date</label>
+            <br>
+            <br>
+          </div>
+          <div class="col-md-4 mt-10" id="bloc-radio2">
+            <input style="vertical-align: inherit;" type="radio" id="radio_annulerRdv" name="radio_annulerRdv" value="Payer Maintenant">
+            <label for="payeNow">Annuler mon rendez-vous </label>
+            <br>
+            <br>
+          </div>
+        </div>
+        <div id='formModiferRdv-hidden' style="display: none;">
+          <form id="formModifierRdv">{% csrf_token %} <span class="text-secondary">Consultation</span>
+            <br>
+            <input type="hidden" value="{{user}}" class="patient">
+            <div class="ui selection dropdown" id="consultations">
+              <input type="hidden" name="consultation">
+              <i class="dropdown icon"></i>
+              <div class="default text" id="consultation-text">Consultation</div>
+              <div class="menu" id="consultations-data-box"></div>
+            </div>
+            <br>
+            <span class="text-secondary">Choisir une nouvelle date</span>
+            <br>
+            <div class="ui selection dropdown" id="horaires">
+              <input type="hidden" name="horaire">
+              <i class="dropdown icon"></i>
+              <div class="default text" id="horaire-text">Choisir date</div>
+              <div class="menu" id="horaires-data-box"></div>
+            </div>
+            <br>
+            <br>
+            <!--   <div class="mt-5 not-visible"><button type="submit" class="btnRdv" id="btnPayeNow" onclick="myFunction()" class="btn btn-primary" style="display: none;">Continuer au paiement</button></div>-->
+            <div id="btn-box" class="mt-5 ">
+              <button type="submit" id='btnModiferRdv' class="btnRdv" role="button"> Modifier </button>
+            </div>
+            <br>
+          </form>
+        </div>
+     <form id="formAnnulerRdv" method="POST">{% csrf_token %} 
+          <a>
+            <div class="btn btn-danger" id="btnAnnulerRdv" style="display: none;" name='Annuler'>Annuler rendez-vous</div>
+          </a>
+        </form>
+      </div>
+      <br>
+
+      </div>
+    </main>
+       
+  </body>
+  <script type="text/javascript">
+    const formModiferRdv = document.getElementById('formModifierRdv')
+    const formAnnulerRdv = document.getElementById('formAnnulerRdv')
+    const updateForm = document.getElementById('update_Form')
+    const nomConsultationAModifier = $('#nomConsultationAModifier').val()
+    const idConsultationAModifier = $('#idConsultationAModifier').val()
+    const consultationsDataBox = document.getElementById('consultations-data-box')
+    const consultationInput = document.getElementById('consultations')
+    const horaireInput = document.getElementById('horaires')
+    const horairesDataBox = document.getElementById('horaires-data-box')
+    const horaireText = document.getElementById('horaire-text')
+    const consultationText = document.getElementById('consultation-text')
+    const csrf = document.getElementsByName('csrfmiddlewaretoken')
+    const btnBox = document.getElementById('btn-text')
+    const alertBox = document.getElementById('alert-box')
+
+
+    const option = document.createElement('div')
+    option.textContent = nomConsultationAModifier
+    option.setAttribute('class', 'item')
+    option.setAttribute('data-value', nomConsultationAModifier)
+    consultationsDataBox.appendChild(option)
+
+    /*pour voir lorsque la valeur du select a changer*/
+    consultationInput.addEventListener('change', e => {
+      console.log(e.target.value)
+      const selectedConsultation = e.target.value /*on recupere la valeur selectionner*/
+      /*permet d'effacer la selection prcedente dans le dropdown*/
+      horairesDataBox.innerHTML = ""
+      horaireText.textContent = 'Choisir une date'
+      /*a revoir 39mn*/
+      horaireText.classList.add("default") /*permet de revenir a la valeur par defaut lorsque la valeur change*/
+      $.ajax({
+        type: 'GET',
+        url: `/horaires-json/${selectedConsultation}/`,
+        /*on utilise ` quand on peut passer en param*/
+        dataType: "json",
+        data: {
+          /*toujours ajouter ca*/
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function(response) {
+          console.log(response.data);
+          const modelData = response.data
+          modelData.map(item => {
+            const option = document.createElement('option')
+            option.textContent = item.horaire
+            option.setAttribute('class', 'item')
+            option.setAttribute('id', 'a')
+            option.setAttribute('data-value', item.horaire)
+            horairesDataBox.appendChild(option)
+          })
+        },
+        error: function(error) {
+          console.log((error));
+        }
+      })
+    });
+    formModiferRdv.addEventListener('submit', e => {
+      e.preventDefault()
+      console.log("test " + idConsultationAModifier)
+      $.ajax({
+        type: 'POST',
+        url: `/updateRdv/${idConsultationAModifier}/`,
+        data: {
+          'horaire': horaireText.textContent,
+          'csrfmiddlewaretoken': csrf[0].value,
+        },
+        success: function(success) {
+          console.log((success));
+          alertBox.innerHTML = `
+                                                                                  <div class="alert alert-success" role="alert">
+                                                                                    <h3>
+                                                                                      <i class="fas fa-check fa-5" style="color:#2a9134; "></i> Rendez-vous modifier avec succes ! 
+                                                                                    </h3>
+                                                                                  </div>`
+              //window.location.href = "{% url 'patient'%}"; // permet de rediriger apres que le form a été sumis
+
+        },
+        error: function(error) {
+          console.log((error));
+          alertBox.innerHTML = `
+                                                                                  <div class="alert alert-danger" role="alert">
+                      Une erreure c'est produite, vérifier le formulaire et reéssayer!
+                    </div>`
+        }
+      })
+    })
+
+
+    formAnnulerRdv.addEventListener('click', e => {
+      e.preventDefault()
+      console.log("Annuler")
+      $.ajax({
+        type: 'POST',
+        url: `/annulerRdv/${idConsultationAModifier}/`,
+        data: {
+          'csrfmiddlewaretoken': csrf[0].value,
+        },
+        success: function(success) {
+          console.log((success));
+          alertBox.innerHTML = `<div class="alert alert-success" role="alert">
+                                 <h3> <i class="fas fa-check fa-5" style="color:#2a9134; "></i> Rendez-vous annuler avec succes !  </h3>
+                               </div>`
+          window.location.href = "{% url 'patient'%}"; // permet de rediriger apres que le form a été sumis
+        },
+        error: function(error) {
+          console.log((error));
+          alertBox.innerHTML = ` <div class="alert alert-danger" role="alert">
+                      Une erreure c'est produite, vérifier le formulaire et reéssayer!
+                    </div>`
+        }
+      })
+    })
+  </script>
+
+  <script type="text/javascript">
+    $('.ui.dropdown').dropdown('show'); /*semantic ui dropdown*/
+    // permet de scroller vers le haut lorsque le button est cliquer
+    $("#btnModiferRdv").click(function() {
+      $(window).scrollTop(0);
+    });
+    $("#btnAnnulerRdv").click(function() {
+      $(window).scrollTop(0);
+    });
+
+
+    const hiddenFormModifier = document.getElementById('formModiferRdv-hidden')
+    /*Func JS pour afficher le button correspondant a la selection du radio button*/
+    /*PS : souvent auqnd on utilise les function en y'a un bug, il faut cliquer 2fois par exemple
+    sur les radios pour que sa*/
+    $(document).ready(function() {
+      var radio_annulerRdv = document.getElementById("radio_annulerRdv");
+      var radio_modifierRdv = document.getElementById("radio_modifierRdv");
+      var formModifierRdv = document.getElementById("form-modifierRdv");
+      var btnAnnulerRdv = document.getElementById("btnAnnulerRdv");
+
+
+      radio_annulerRdv.onclick = function() {
+        $("#radio_modifierRdv").prop("checked", false); // permet de unchecked les radios
+        hiddenFormModifier.style.display = "none";
+        if (btnAnnulerRdv.style.display === "none") {
+          btnAnnulerRdv.style.display = "block";
+        } else {
+          btnAnnulerRdv.style.display = "none";
+        }
+      }
+      radio_modifierRdv.onclick = function() {
+        $("#radio_annulerRdv").prop("checked", false); // permet de unchecked les radios
+
+        hiddenFormModifier.style.display = "block";
+        btnAnnulerRdv.style.display = "none";
+      }
+    })
+  </script>
+</html>

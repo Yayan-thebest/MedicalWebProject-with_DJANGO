@@ -1,0 +1,179 @@
+
+{% include 'navbarAdmin.html' %}
+
+<!DOCTYPE html>
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+<html>
+<head>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	
+	<title>Clinique Sainte Bernadette</title>
+  <!-- lien BS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- lien icones -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<title>Clinique Sainte Bernadette</title>
+
+
+    <!-- icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+  <!-- Custom styles for our template -->
+  <link  type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}" media="screen" >
+  <link  type="text/css" rel="stylesheet" href="{% static 'css/main.css' %}">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter&family=Mukta:wght@200;300&display=swap" rel="stylesheet">
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- semantic UI -->
+    <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>   
+
+</head>
+<body id="body-confirmRdv" style="background-color: #F8F8F8; margin-top: 510x;">
+
+<main role="main" class="container" >
+
+    <div class="jumbotron" id="" style="background-color:#fff ;">
+        <h3>Informations sur Dr. <span> {{query_docteur.nomDocteur}} {{query_docteur.prenomDocteur}}</span> </h3> 
+
+         <b>Post :  </b>
+        {%for post in query_listPostDocteur%}
+              {{post}},
+        {%endfor%} <br><br><hr>
+          <div class="tab-pane" id="mesInfos" role="tabpanel">
+
+                    <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Nom & prénom</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{query_docteur.nomDocteur}} {{query_docteur.prenomDocteur}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{query_docteur.email}}                   
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Contact</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{query_docteur.tel}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Date de naissance</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                       {{query_docteur.dateNaissance}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Addresse</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{query_docteur.adresse}}
+                    </div>
+                  </div>
+                </div> <br><br>
+
+                  <button type="" id="btnUpdateDocteur" class="mb-10 btn-link" > Mettre à jour</button><br>  
+
+      </div><br>
+
+          <div class="jumbotron" id="updateDocteur-bloc"  style="background-color:#fff ; display: none;">
+                 <div class="row">
+
+       <h3>  Mettre à jour les informations de Dr. {{query_docteur.nomDocteur}} {{query_docteur.prenomDocteur}} </h3><hr><br><br>
+                                          <div class="col-md-6">
+
+
+                <form method="POST" id="update_Form">{% csrf_token %}                
+                  <div class="form-group">
+                    <span class="text-secondary">Numéro de téléphone</span> <br>
+                     <input type="tel" id="phone" name="tel"  class="form-control" placeholder="00-00-00-00" pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}" required value="{{query_docteur.tel}}" >
+                  </div>
+                  <div class="form-group">
+                    <span class="text-secondary">Adresse</span> <br>
+                    <input type="text" name="adresse" id="inputAdresse" class="form-control" placeholder="Adresse" required value="{{query_docteur.adresse}}" >
+                  </div><br>
+                  <button type="submit" id="btn" class="mb-10"> Enregistrer</button><br>  
+                </form>
+              </div>
+                </div> <br><br>
+                        
+      </div>
+</main><br> 
+<div> </div>
+
+
+</body>
+
+<script type="text/javascript">
+
+var btnUpdateDocteur   = document.getElementById("btnUpdateDocteur");
+var blocUpdateDocteur = document.getElementById("updateDocteur-bloc");
+
+// permet de scroller vers le haut lorsque le button est cliquer
+
+     btnUpdateDocteur.onclick = function() {
+          /*FUnction pour scroller automatiquement au bas de l page avec animation */
+            $(document).ready(function() {
+             $("html, body").animate({
+                                scrollTop: $(
+                      'html, body').get(0).scrollHeight
+                }, 2000);
+            });
+            if (blocUpdateDocteur.style.display === "block") {
+              blocUpdateDocteur.style.display = "none";
+            } else {
+              blocUpdateDocteur.style.display = "block";
+            }
+    }
+
+</script>
+
+<script type="text/javascript">
+
+
+</html>

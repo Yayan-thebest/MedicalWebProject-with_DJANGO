@@ -1,0 +1,119 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <title>S'inscrire</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <!------ Include the above in your HEAD tag ---------->
+
+        <link  type="text/css" rel="stylesheet" href="{% static 'css/register.css' %}">
+
+
+</head>
+<body>
+
+
+<div class=" register">
+                <div class="row">
+                    <div class="col-md-4 register-left" id="textLeft-register">
+                        <h2>CLINIQUE SAINTE BERNADETTE</h2>
+                        <p>Créer un compte pour prendre rendez-vous et accéder à vos informations personnelles!</p>
+                        <div>   
+                        <p>Vous avez déjà un compte?</p>
+                        <a href="{%url 'login'%}"><input type="submit" name="" value="Se connecter"/></a><br/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4  register-right">
+
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h3 class="register-heading">Créer un compte</h3>
+
+                                <form method="POST"> 
+                                    {% csrf_token %}
+                                    
+                                <div class="row register-form">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" name="nom" id="inputNom" class="form-control" placeholder="Nom de famille" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="prenom" id="inputPrenom" class="form-control" placeholder="Prénom(s)" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="date" name="dateNaissance" id="inputPrenom" class="form-control" placeholder="Prénom(s)" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control" name="sexe">
+                                                <option value="" selected disabled hidden>Choisir genre</option>
+                                                <option>
+                                                    Homme
+                                                </option>
+                                                <option>
+                                                    Femme
+                                                </option>
+
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="tel" id="phone" name="tel"  class="form-control" placeholder="00000000" pattern="[0-9]{8}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="adresse" class="form-control" placeholder="Adresse" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password"  name="password1" class="form-control" placeholder="Mot de passe" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password2" class="form-control" placeholder="Confirmer mot de passe" value="" />
+                                        </div>
+                                       
+                                        {%if registration_form.non_field_errors%}
+                                                <div style="color: red;">
+                                                    <p>{{registration_form.non_field_errors}}</p>
+                                                </div>
+                                        {%endif%}
+                                           
+                                        {%for field in registration_form%}
+                                                {%for error in field.errors%}
+                                                    <div style="color: red;">
+                                                        <p>{{error}}</p>
+                                                    </div>
+                                                {%endfor%}
+                                        {%endfor%}
+
+
+                                        <input type="submit" class="btnRegister"  value="S'enregistrer"/>
+                                    </div>
+                                    </form>
+                             
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+    
+</body>
+</html>
+

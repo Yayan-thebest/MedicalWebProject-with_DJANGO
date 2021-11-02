@@ -1,0 +1,177 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!--Permet de rendre la page responsive-->
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+
+    <title>Clinique Siante Bernadette</title>
+    <link  type="text/css" rel="stylesheet" href="{% static 'new-style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <!--Lien Font familly-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Lien pour les icones-->
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+</head>
+<body>
+
+    <section class="header">
+
+        <nav>
+            <a href="{% url 'acceuil' %}"><img src="{% static 'images/logo.png' %}"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+
+                <ul>
+                    <li><a href="{% url 'acceuil' %}">ACCEUIL</a></li>
+                    <li><a href="{% url 'about' %}">A PROPOS</a></li>
+                    <li><a href="{% url 'service' %}">SERVICES</a></li>
+                    <li><a href="{% url 'contact' %}">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+
+        </nav>
+
+
+        <div class="text-box">
+             <h1>Clinique Sainte Bernadette</h1>
+             <i><p>Votre santé notre priorité.</p></i>
+             <a class="hero-btn" href="{% url 'login' %}">PRENDRE RDV</a>
+        </div>
+    </section>
+
+
+
+    
+
+    <section class="section-bloc-textImage-jumborton">
+        <h1>
+            Bienvenu(e) sur le site officiel de la Clinique médical Sainte Bernadette.
+        </h1>
+        <p> Vous y trouverez bon nombre d'informations concernant la clinique et encore plus.</p><hr>   
+
+        <div class="row">
+            <div class="section-bloc-textImage-jumborton-col">
+                <h3><i class="fa fa-hospital-o"></i>
+                Une Clinique accueillante et Polyvalente</h3>
+                <p>La Clinique Sainte Bernadette opère dans un cadre acceuillant. Elle dipose d'une salle d'attente,doter de toute les commodités. Il est à noter que c'est un lieu non fumeur, l'usage de téléphone est interdit et que le clinique est sous surveillance électronique.</p>
+            </div>
+            <div class="section-bloc-textImage-jumborton-col">
+                <h3><i class="fa fa-user-md"></i>Une équipe proféssionnelle</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                </p>
+            </div>
+            <div class="section-bloc-textImage-jumborton-col">
+                <h3><i class="fa fa-heartbeat" ></i>Votre bien-être notre priorité</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                </p>
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="section-text-with-image">
+        
+        <div class="row">
+            <div class="section-text-with-image-col">
+                <img  src="{% static 'images/24.jpg'%}">                
+            </div>
+            <div class="section-text-with-image-col">
+                <div>
+                    <h1>Une Clinique accueillante et Polyvalente</h1><br>   
+
+                    <p id="block2">La Clinique Sainte Bernadette opère dans un cadre acceuillant. Elle dipose d'une salle d'attente,doter de toute les commodités. Il est à noter que c'est un lieu non fumeur, l'usage de téléphone est interdit et que le clinique est sous surveillance électronique.</p>                    
+                </div>
+            </div>
+                            
+        </div>      
+    </section>
+
+
+    <section class="section-bloc-textImage">
+        <h1>Nous offrons plusieurs services</h1>
+        <p>Le CMSB fourni des prestations médicales à l’ensemble de la population résidente mais aussi aux expatriés toute nationalité confondue, ce qui lui vaut une reconnaissance aussi bien nationale qu’internationale, dans les efforts qu’elle met en œuvre pour une prise en charge optimale des patients, qu’elle reçoit.</p>
+
+        <div class="row">
+            <div class="section-bloc-textImage-col">
+                <img  src="{% static 'images/24.jpg'%}">
+                <h3>Dentiserie</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+            </div>
+            <div class="section-bloc-textImage-col">
+                <img  src="{% static 'images/29.jpg'%}">
+                <h3>Radio</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+            </div>
+            <div class="section-bloc-textImage-col">
+                <img  src="{% static 'images/31.jpg'%}">
+                <h3>Chrirurgie</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+            </div>                      
+        </div>
+        <div>
+            <a href="{% url 'service' %}">En savoir plus</a>
+        </div>
+        
+    </section>
+
+
+    <section class="section-text-with-image">
+        
+        <div class="row">
+            <div class="section-text-with-image-col">
+                    <h1>Lorem ipsum dolor sit amet  </h1><br>   
+
+                    <p >La Clinique Sainte Bernadette opère dans un cadre acceuillant. Elle dipose d'une salle d'attente,doter de toute les commodités. Il est à noter que c'est un lieu non fumeur, l'usage de téléphone est interdit et que le clinique est sous surveillance électronique.</p>                    
+            </div>
+            <div class="section-text-with-image-col">
+                <img  src="{% static 'images/19.jpg'%}">                
+
+                
+            </div>
+                            
+        </div>      
+    </section>
+
+
+    <section class="section-text-on-image">
+        <h1>PRENDRE RENDEZ-VOUS AVEC NOS SPÉCIALISTES!</h1>
+         <a class="hero-btn" href="{% url 'login' %}">OBTENIR UN RENDEZ-VOUS </a>
+    </section>
+
+    <!--Footer-->
+    {% include 'footer.html' %}
+
+
+
+<!--JS for toogle menu-->
+<script type="text/javascript">
+    var navLinks = document.getElementById("navLinks");
+
+    /*em css on a mi la valeur de nav-links(right :-200px) ici on le met a 0  lorsqu'on clique sur show*/
+    function showMenu(){
+        navLinks.style.right= "0";
+    }
+    /*et on le remet a -200 lorsqu'on clique sur hide*/
+    function hideMenu(){
+        navLinks.style.right= "-200px";
+    }
+
+</script>   
+</body>
+</html>

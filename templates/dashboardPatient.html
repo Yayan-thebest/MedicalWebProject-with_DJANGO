@@ -1,0 +1,300 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+    <!--Permet de rendre la page responsive-->
+    <meta name="viewport" content="width=device-width initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+
+    <title>Clinique Siante Bernadette</title>
+    <link  type="text/css" rel="stylesheet" href="{% static 'new-style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <!--Lien Font familly-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Lien pour les icones-->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+<body class="dahboard-body">
+	<input type="checkbox" name="" id="sidebar-toggle" style="display: none;">
+
+	<div class="sidebar" style="background-color: #000; width: 280px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	padding: 1rem 1.5rem;
+	background-color:#000;
+	color: #fff;
+	z-index: 20;
+	transition: left 300ms;">
+		<div class="sidebar-brand">
+			<div class="brand-flex">
+				<img  src="{% static 'images/24.jpg'%}" width="30px"> 
+
+				<div class="brand-icons">
+					<span class="las la-bell"></span>
+					<span class="las la-user-circle"></span>				
+				</div>
+			</div>
+		</div>
+
+		<div class="sidebar-main">
+			<div class="sidebar-user">
+				<img  src="{% static 'images/24.jpg'%}" width="30px"> 
+				<div>
+					<h3>Alan Kay</h3>
+					<span>aaa@gmail.com</span>
+				</div>				
+			</div>
+
+			<div class="sidebar-menu">
+				<div class="menu-head">
+					<span>Dashboard</span>					
+				</div>
+				<ul>
+                    <li>
+                    	<a href="{% url 'acceuil' %}">
+                    		<span class="las la-chart-pie"></span> ACCEUIL
+                    	</a>
+                    </li>
+                    <li>
+                    	<a href="{% url 'about' %}">
+                    		<span class="las la-balance-scale"></span>A PROPOS
+                    	</a>
+                    </li>
+                    <li>
+                    	<a href="{% url 'service' %}">
+                    		<span class="las la-chart-pie"></span>	SERVICES
+                    	</a>
+                    </li>
+                    <li>
+                    	<a href="{% url 'contact' %}"
+                    	>
+                    	<span class="las la-chart-pie"></span>CONTACT
+                    	</a>
+                    </li>
+				</ul>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="main-content">
+		<header>
+			<div class="menu-toggle">
+				<label for="">
+					<span class="las la-bars"></span>
+				</label>
+			</div>
+			<div class="header-icons">
+				<span class="las la-search"></span>
+				<span class="las la-bookmark"></span>
+				<span class="las la-sms"></span>
+			</div>
+		</header>
+
+		<main>
+			<div class="page-header">
+				<div>
+					<h1>DASHBOARD</h1>
+					<small>Monitor key metrics</small>
+				</div>
+
+				<div class="header-actions">
+					<button>
+						<span class="las la-file-export"></span>Export
+					</button>
+					<button>
+						<span class="las la-tools"></span>Settings
+					</button>
+				</div>
+			</div>
+
+
+			<div class="cards">
+				<div class="card-single">
+					<div class="card-flex">
+						<div class="card-info">
+							<div class="card-head">
+								<span>Consultations</span>
+								<span>Nombre de consulatiotion</span>
+							</div>
+							<h2>100</h2>
+							<small>2% moins de cons</small>
+							
+						</div>
+						<div class="card-chart success">
+							<span class="las la-chart-line"></span>							
+						</div>
+					</div>					
+				</div>
+
+
+				<div class="card-single">
+					<div class="card-flex">
+						<div class="card-info">
+							<div class="card-head">
+								<span>Visiteurs</span>
+								<span>Nombre de visiteurs</span>
+							</div>
+							<h2>100</h2>
+							<small>2% moins de visiteurs</small>
+							
+						</div>
+						<div class="card-chart danger">
+							<span class="las la-chart-line"></span>							
+						</div>
+					</div>					
+				</div>
+
+				<div class="card-single">
+					<div class="card-flex">
+						<div class="card-info">
+							<div class="card-head">
+								<span>Rendez-vous aujourd'hui</span>
+								<span>Nombre de RDV</span>
+							</div>
+							<h2>100</h2>
+							<small>2% moins de cons</small>
+							
+						</div>
+						<div class="card-chart yellow">
+							<span class="las la-chart-line"></span>							
+						</div>
+					</div>					
+				</div>
+			</div>
+
+
+
+
+			<div class="jobs-grid">
+				<div class="analytics-card">
+					<div class="analytics-head">
+						<h3>Actions requises</h3>
+						<span class="las la-ellipsis-h"></span>
+					</div>
+
+					<div class="analytics-chart">
+						<div class="chart-circle">
+							<h1>74%</h1>
+						</div>
+
+						<div class="analytics-note">
+							<small>Note : une action est requise maintenant</small>
+						</div>
+					</div>
+
+					<div class="analytics-btn">
+						<button>Générer le rapport</button>
+					</div>
+				</div>
+				<div class="jobs">
+					<h2>JObs<small > Voir tout les</small><span class="las la-arrow-right"></span></h2>
+					
+					<div class="table-responsive">
+						<table width="100%">
+						<tbody>
+							<tr>
+								<td>
+									<div>	
+										<span class="indicator "></span>
+									</div>
+								</td>
+								<td>
+									<div>
+										Généraliste
+									</div>
+								</td>
+								<td>
+									<div>
+										Généraliste
+									</div>
+								</td>
+								<td>
+									<div>
+										Généraliste
+									</div>
+								</td>
+								<td>
+									<div>
+										<button>8 applicants</button>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>	
+										<span class="indicator even"></span>
+									</div>
+								</td>
+								<td>
+									<div>
+										Généraliste
+									</div>
+								</td>
+								<td>
+									<div>
+										Généraliste
+									</div>
+								</td>
+								<td>
+									<div>
+										Généraliste
+									</div>
+								</td>
+								<td>
+									<div>
+										<button>8 applicants</button>
+									</div>								
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>	
+										<span class="indicator even"></span>
+									</div>
+								</td>
+								<td>
+									<div>
+										Généraliste
+									</div>
+								</td>
+								<td>
+									<div>
+										Généraliste
+									</div>
+								</td>
+								<td>
+									<div>
+										Généraliste
+									</div>
+								</td>
+								<td>
+									<div>
+										<button>8 applicants</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		</main>
+		
+	</div>
+
+
+
+
+
+
+
+</body>
+</html>

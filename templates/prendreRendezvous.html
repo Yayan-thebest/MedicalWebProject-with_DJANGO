@@ -1,0 +1,701 @@
+
+<!DOCTYPE html>
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+<html>
+<head>
+  <head>
+  <meta charset="utf-8">
+  
+    <!--Permet de rendre la page responsive-->
+  <meta name="viewport" content="width=device-width initial-scale=1.0">
+
+  <title>Clinique Siante Bernadette</title>
+  <link  type="text/css" rel="stylesheet" href="{% static 'new-style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Lien pour les icones-->
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <!-- semantic UI -->
+    <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>   
+
+</head>
+
+<body>
+
+  <section class="sub-header">
+      <a href="{% url 'acceuil' %}"><h1>Clinique Sainte Bernadette</h1></a>
+
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+
+                <ul>
+                    <li><a href="{% url 'acceuil' %}">ACCEUIL</a></li>
+                    <li><a href="{% url 'about' %}">A PROPOS</a></li>
+                    <li><a href="{% url 'service' %}">SERVICES</a></li>
+                    <li><a href="{% url 'contact' %}">CONTACT</a></li>
+                </ul>
+      </div>
+      <i class="fa fa-bars" onclick="showMenu()"></i>
+
+    </nav>
+    <h1>Nous contacter</h1>
+
+  </section>
+
+
+<div> 
+ <div id='alert-box'></div>
+
+        <div id='alert-box2'>
+
+               {%for field in account_form%}
+                    {%for error in field.errors%}
+                      <div class="alert alert-danger" role="alert" >
+                        <p>{{error}}</p>
+                      </div>
+                    {%endfor%}
+                  {%endfor%}
+
+                  {%if account_form.non_field_errors%}
+                    <div class="alert alert-danger" role="alert" >
+                      {{account_form.non_field_errors}}
+                    </div>
+                  {%endif%}
+                                  
+                      {%if messages %}
+                      <br><ul class="messages" id="messages" >
+                        {%for message in messages%}
+                          <div class="alert alert-success" role="alert" >
+                            {{message}}
+                          </div>                               
+                        {%endfor%}
+                      </ul>
+                    {%endif%} 
+        </div>
+
+</div>
+
+
+ <section class="center-block">
+                    <h1>Formulaire de rendez-vous</h1>
+                  <form method="POST"> 
+                                    {% csrf_token %}
+                                                        <h3>Etape 1 : informations personnelles</h3>
+
+                                <div class="row register-form">
+                                    <div class="col-md-8">
+                                        <span >Nom de famille</span>
+                                        <div class="form-group">
+                                            <input type="text" name="nom" id="nom-text" class="form-control" placeholder="Nom de famille" required>
+                                        </div>
+                                         <span >Pérnom(s)</span>
+                                        <div class="form-group">
+                                            <input type="text" name="prenom" id="inputPrenom" class="form-control" placeholder="Prénom(s)" required>
+                                        </div>
+                                         <span >Date de naissance</span>
+                                        <div class="form-group">
+                                            <input type="date" name="dateNaissance" id="inputPrenom" class="form-control"  required>
+                                        </div>
+                                          <span >Sexe</span>
+
+                                        <div class="form-group">
+                                            <select class="form-control" name="sexe">
+                                                <option value="" selected disabled hidden>Choisir genre</option>
+                                                <option>
+                                                    Homme
+                                                </option>
+                                                <option>
+                                                    Femme
+                                                </option>
+
+                                            </select>
+                                        </div>
+
+                                        <span >Numéro de téléphone</span>
+                                        <div class="form-group">
+                                            <input type="tel" id="phone" name="tel"  class="form-control" placeholder="00000000" pattern="[0-9]{8}" required>
+                                        </div>
+                                        <span >Email</span>
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="email-text" class="form-control" placeholder="Email" required autofocus>
+                                        </div>
+                                        <span >Adresse de domicile</span>
+                                        <div class="form-group">
+                                            <input type="text" name="adresse" class="form-control" placeholder="Adresse" value="" />
+                                        </div>
+                                       
+                                        {%if registration_form.non_field_errors%}
+                                                <div style="color: red;">
+                                                    <p>{{registration_form.non_field_errors}}</p>
+                                                </div>
+                                        {%endif%}
+                                           
+                                        {%for field in registration_form%}
+                                                {%for error in field.errors%}
+                                                    <div style="color: red;">
+                                                        <p>{{error}}</p>
+                                                    </div>
+                                                {%endfor%}
+                                        {%endfor%}
+
+                                           <a id="btn-suivant1" class="btn-static">Suivant</a>
+
+
+                                    </div>
+
+                                    </form>
+
+
+                 <form id="rdv-form" >{% csrf_token %}
+                    <div id="rdv-form-hide" style="display: none;"> 
+                    <h3>Etape 2 : choix de la consultation</h3>
+                    <div  class="col-md-8">
+                        <span >Choisir une consultation</span> <br>
+                        <input type="hidden" value="{{user}}" class="patient">
+                        <div class="ui selection dropdown" id="consultations">
+                          <input type="hidden" name="consultation">
+                          <i class="dropdown icon"></i>
+                          <div class="default text" id="consultation-text">Choisir consultation</div>
+                          <div class="menu" id="consultations-data-box">
+                            
+                          </div>
+                        </div> <br> 
+
+                        <span >Choisir une date</span> <br>
+                        <div class="ui selection dropdown" id="horaires">
+                          <input type="hidden" name="horaire">
+                          <i class="dropdown icon"></i>
+                          <div class="default text" id="horaire-text">Choisir date</div>
+                          <div class="menu" id="horaires-data-box">
+                            
+                          </div>
+                        </div> <br><br>
+
+                    <div >
+                          <div >
+                                Prix de la consultation : &nbsp;     <b id="prix_consultation" style="color: black;"> </b>
+
+                          </div>
+
+                    </div> <br><br><br><br>
+
+                      <div id="btn-box" class="mt-5 not-visible">
+                          <p>NB : Vous pouvez payer maintenant en toute sécurité, afin d'avoir la priorité. 
+                      Ou décider de payer au comptoire avant votre consultation le jour de votre rendez-vous.</p>
+                              <i id="titre-radio" style="display: none;">Choisir une option :</i><br>
+                        <div class="row">
+                          <div  id="bloc-radio1" style="display: none;">
+                            <input type="radio" id="radioPayeAfter" name="radioPayement" value="Payer a l'arriver" style="vertical-align: inherit; ">
+                            <label for="payeAfter">Payer à l'arriver</label><br>
+                          </div>
+                          <div  id="bloc-radio2"  style="display: none;">
+                            <input style="vertical-align: inherit;"  type="radio" id="radioPayNow" name="radioPayement" value="Payer Maintenant">
+                            <label for="payeNow">Payer maintenant</label><br>
+                           </div>
+                        </div>
+                      </div> <br>
+
+                    <div id="btn-box" class="mt-5 not-visible">
+                        <button type="submit" class="btnRdv" id="btnPayeAfter" class="btn btn-warning" role="button" style="display: none;"> Payer à l'arriver </button>
+                    </div> <br>
+                 <!--   <div class="mt-5 not-visible">
+                        <button type="submit" class="btnRdv" id="btnPayeNow" onclick="myFunction()" class="btn btn-primary" style="display: none;">Continuer au paiement</button>
+                    </div>-->
+                          </div>  <!--div col-md-8-->
+                            </div>  <!--fin div rdv-from-hide-->
+               </form>
+                     
+                    <div class="col-md-8" id="paypal_payment" style="display: none;">
+
+                              <h1>Finaliser mon rendez-vous</h1>
+                              <h3>Résumer du rendez-vous</h3>
+                              <div >
+                                    <div >
+                                          Consulation :&nbsp;     <b id="consultationFacture" style="color: black;"> </b>
+                                    </div>
+                                    
+                              </div> <br>
+                              <div >
+                                    <div >
+                                          Date : &nbsp;     <b id="horaireFacture" style="color: black;"> </b>
+                                    </div>                                  
+
+                              </div> 
+                              <div class="row">
+                                    <div class="col-sm-3">
+                                          TOTAL : &nbsp;     <b id="prixFacture" style="color: black;"> </b>
+                                    </div>
+
+                              </div> 
+                              <br>
+                              {{prix}}
+                              {%for cons in query_cons%}
+                                pp : {{cons.nom}}
+                              {%endfor%}
+
+                             
+                              <br> <br> <div id="paypal-button-container"></div>
+                             
+
+                        </div>
+
+                      <!-- Include the PayPal JavaScript SDK -->
+                    <script src="https://www.paypal.com/sdk/js?client-id=ATW2nmcVJbrsXQV-8ELCOQiGOxr9CUG8I9GD7oeIh6xN27twnb2j990jkda8ozcnLiWF-O1Wr1q9dQOZ&currency=USD"></script>
+
+                     <script>
+                        /*la position des scripts comptent par exemple le script en bas peut accéder au variable du
+                        script en haut*/
+                        var total=''
+                        var consultationId = ''
+                        var horaire_paypal = ''
+
+                        var emailSend =''
+
+                        const consultationInput = document.getElementById('consultations')
+                          const horaireInput = document.getElementById('horaires')
+
+                        const emailText = document.getElementById('email-text')
+                        const nomText = document.getElementById('nom-text')
+
+
+
+                        consultationInput.addEventListener('change', e=>{
+                            console.log(e.target.value)
+
+                            alertBox.innerHTML="" /*on remet l'arlet a blank lorsque ya une nouvelle selection*/
+                            const selectedConsultation = e.target.value /*on recupere la valeur selectionner*/
+
+                         $.ajax({
+                                type        : 'GET', 
+                                url         : `/prix-json/${selectedConsultation}/`, //on utilise ` quand on veut passer en param
+                                dataType  : "json",
+                                data       : {
+                                  //toujours ajouter ca
+                                },
+                                success: function(response){
+                                       
+                                  var obj = JSON.parse(JSON.stringify(response));
+                                   total = obj.prix;
+                                   consultationId = selectedConsultation;
+                               
+                                },
+                                error : function(error){
+                                            console.log((error));
+                                }
+                          })
+                      })
+
+                      horaireInput.addEventListener('change', e=>{
+                            console.log(e.target.value)
+                           const selectedHoraire = e.target.value /*on recupere la valeur selectionner*/
+
+
+                      $.ajax({
+                              type        : 'GET', 
+                              url         : `/horaires-json/${selectedHoraire}/`, /*on utilise ` quand on peut passer en param*/
+                              dataType    : "json",
+                              data        : {
+                                   'email': emailText.textContent,
+                                   'nomPatient': nomText.textContent,
+                               },
+                              success: function(response){
+                                   var obj = JSON.parse(JSON.stringify(response));
+                                   horaire_paypal = selectedHoraire;
+                                   emailSend = emailText.textContent;
+                            },
+                            error : function(error){
+                                      console.log((error));
+                          }
+
+
+                        })
+
+                   
+                    })
+
+
+                      function getCookie(name) {
+                          let cookieValue = null;
+                          if (document.cookie && document.cookie !== '') {
+                              const cookies = document.cookie.split(';');
+                              for (let i = 0; i < cookies.length; i++) {
+                                  const cookie = cookies[i].trim();
+                                  // Does this cookie string begin with the name we want?
+                                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                      break;
+                                  }
+                              }
+                          }
+                          return cookieValue;
+                      }
+                      const csrftoken = getCookie('csrftoken');
+
+                         
+                      // cette fonction permet de POSTER les data a l'url 'complete'
+                          function completeOrder(){
+                            var url = "{%url 'completeInvite'%}"
+
+                            fetch(url, {
+                              method : 'POST',
+                              headers : {
+                                'Content-type':'application/json',
+                                'X-CSRFToken':csrftoken,
+                                'emailSend': emailText.textContent,
+
+                              },
+                              body : JSON.stringify({'consultationId': consultationId, 'horaire_paypal': horaire_paypal,  'emailSend': emailSend})
+                            })
+                          }
+
+                          // Render the PayPal button into #paypal-button-container
+                          paypal.Buttons({
+
+                              // Set up the transaction
+                              createOrder: function(data, actions) {
+                                  return actions.order.create({
+                                      purchase_units: [{ 
+                                          amount: {
+                                              value: total
+                                          }
+                                      }]
+                                  });
+                              },
+
+                              // Finalize the transaction
+                              onApprove: function(data, actions) {
+                                  return actions.order.capture().then(function(details) {
+                                      // Show a success message to the buyer
+                                      completeOrder()
+                                     /* alert('Transaction completed by ' + details.payer.name.given_name + '!');*/
+                                      alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                                      alertBox.innerHTML=`<div class="alert alert-success" role="alert">
+                                                          <h3>  <i class="fas fa-check fa-5" style="color:#2a9134; "></i> Payement réussie! Votre formulaire à été sousmis avec succes ! </h3>
+                                                        </div>`
+  
+                                      $(window).scrollTop(0);
+                                  });
+                              }
+                          }).render('#paypal-button-container');
+                      </script>
+
+  
+    </section>
+
+
+
+  
+  <!--Footer--> 
+  {% include 'new-footer.html' %}
+
+
+
+
+
+
+</body>
+
+
+
+
+<script type="text/javascript">
+
+  const rdvForm = document.getElementById('rdv-form')
+  const updateForm = document.getElementById('update_Form')
+
+  const consultationsDataBox = document.getElementById('consultations-data-box')
+  //const consultationInput = document.getElementById('consultations')
+
+
+  const horairesDataBox = document.getElementById('horaires-data-box')
+  //const horaireInput = document.getElementById('horaires')
+
+  const horaireText = document.getElementById('horaire-text')
+  const consultationText = document.getElementById('consultation-text')
+ 
+
+
+  
+  const csrf = document.getElementsByName('csrfmiddlewaretoken')
+
+  const btnBox   = document.getElementById('btn-text')
+  const alertBox = document.getElementById('alert-box')
+
+  const tab_Input = document.getElementById('tabInput') // var pour les tabs menus
+  const btn_paye_after = document.getElementById('btnPayeAfter')
+
+    const searchForm = document.getElementById('search-form')
+
+
+var globalVariable={
+       x: 1
+    };
+
+  /*ajax pour populer seectbox avec liste de consultation*/
+    $.ajax({
+            type        : 'GET', 
+            url         : "/consultations-json/",
+            dataType  : "json",
+            data       : {
+              /*toujours ajouter ca*/
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(response){
+
+          const consultationListData = response.data
+          consultationListData.map(item=>{
+            const option = document.createElement('div')
+            option.textContent = item.nom
+            option.setAttribute('class', 'item')
+            option.setAttribute('data-value', item.nom)
+            consultationsDataBox.appendChild(option)
+          })
+
+         },
+         error : function(error){
+                     console.log((error));
+         }
+
+    });
+
+   
+
+  /*pour voir lorsque la valeur du select a changer*/
+    consultationInput.addEventListener('change', e=>{
+    console.log(e.target.value)
+
+    alertBox.innerHTML="" /*on remet l'arlet a blank lorsque ya une nouvelle selection*/
+    const selectedConsultation = e.target.value /*on recupere la valeur selectionner*/
+
+    $("#consultationFacture").text(selectedConsultation); /*on affiche le nom de la consultation dans la facture*/
+ 
+    /*permet d'effacer la selection prcedente dans le dropdown*/
+    horairesDataBox.innerHTML=""
+    horaireText.textContent = 'Choisir une date'
+
+    /*a revoir 39mn*/
+    horaireText.classList.add("default") /*permet de revenir a la valeur par defaut lorsque la valeur change*/
+
+
+    $.ajax({
+            type        : 'GET', 
+            url         : `/horaires-json/${selectedConsultation}/`, /*on utilise ` quand on peut passer en param*/
+            dataType    : "json",
+            data        : {
+              /*toujours ajouter ca*/
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(response){
+          console.log(response.data);
+          const modelData = response.data
+
+          modelData.map(item=>{
+            const option = document.createElement('option')
+            option.textContent = item.horaire
+            option.setAttribute('class', 'item')
+            option.setAttribute('id', 'a')
+            option.setAttribute('data-value', item.horaire)
+            horairesDataBox.appendChild(option)
+
+          })
+
+          },
+          error : function(error){
+                    console.log((error));
+        }
+
+
+      })
+
+
+     $.ajax({
+            type        : 'GET', 
+            url         : `/prix-json/${selectedConsultation}/`, //on utilise ` quand on veut passer en param
+            dataType  : "json",
+            data       : {
+              //toujours ajouter ca
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(response){
+
+               var obj = JSON.parse(JSON.stringify(response));
+
+              $("#prix_consultation").text(obj.prix + " Fcfa"); /*on affiche le nom de la consultation dans la facture*/
+
+              $("#prixFacture").text(obj.prix + " Fcfa"); /*on affiche le prix de la consultation dans la facture*/
+
+            },
+            error : function(error){
+                        console.log((error));
+            }
+      })
+
+  });
+
+  /*Action qui permet de recuperr la date exact choisi par l'user et l'envoyer dans la facture*/
+  horaireInput.addEventListener('change', e=>{
+    console.log(e.target.value)
+
+    alertBox.innerHTML="" /*on remet l'arlet a blank lorsque ya une nouvelle selection*/
+    const selectedHoraire = e.target.value /*on recupere la valeur selectionner*/
+
+    $("#horaireFacture").text(selectedHoraire); /*on affiche le nom de la consultation dans la facture*/
+
+
+    var radio_payeAfter = document.getElementById("bloc-radio1");
+    var radio_payeNow   = document.getElementById("bloc-radio2");
+    var titre_radio   = document.getElementById("titre-radio");
+
+
+    /*on hide le button et on affiche paypal*/
+    radio_payeAfter.style.display = "block";
+    radio_payeNow.style.display = "block";
+    titre_radio.style.display ="block";
+    
+  });
+
+btn_paye_after.addEventListener('click',  e=>{
+
+});
+
+  rdvForm.addEventListener('submit', e=>{
+    e.preventDefault()
+    console.log('Envoyé')
+
+    $.ajax({
+           type        : 'POST', 
+            url         : "/createRdvInvite/",
+            data       : {
+              'consultation': consultationText.textContent,
+              'email': emailText.textContent,
+              'nomPatient': nomText.textContent,
+              'horaire': horaireText.textContent,
+              'csrfmiddlewaretoken': csrf[0].value,
+              'patient': $('.patient').attr("value"),
+            },
+            success : function(success){
+                     console.log((success));
+                     alertBox.innerHTML=`<div class="alert alert-success" role="alert">
+                     <h2>  <i class="fas fa-check fa-5" style="color:#2a9134; "></i> Formulaire soumis avec succes ! </h2>
+                      <h5>NB : vous devrez payer votre consultation au comptoir le jour de votre rendez-vous.</h5>
+                    </div>`
+        },
+            error : function(error){
+                    console.log((error));
+                    alertBox.innerHTML=`<div class="alert alert-danger" role="alert">
+                      Une erreure c'est produite, vérifier le Formulaire !
+                    </div>`
+        }
+    })
+  })
+
+
+    searchForm.addEventListener('submit', e=>{
+    e.preventDefault()
+
+  })
+
+
+
+</script>
+
+<script type="text/javascript">
+$('.ui.dropdown').dropdown('show'); /*semantic ui dropdown*/
+
+/*function pour effacer le message lorsqu'on click sur un élément*/
+ $(".tabInput").click(function(){
+    const alertBox2 = document.getElementById('alert-box2')
+
+      alertBox2.innerHTML=""
+  });
+
+// permet de scroller vers le haut lorsque le button est cliquer
+ $("#btnPayeAfter").click(function(){
+ 
+    $(window).scrollTop(0);
+
+  });
+
+</script>
+
+<script type="text/javascript">
+
+
+/*Func JS pour afficher le button correspondant a la selection du radio button*/
+/*PS : souvent auqnd on utilise les function en y'a un bug, il faut cliquer 2fois par exemple
+sur les radios pour que sa*/
+
+ $(document).ready(function(){
+
+
+    //var payeNow = document.getElementById("btnPayeNow");
+    var payeAfter = document.getElementById("btnPayeAfter");
+
+    var radio_payeAfter = document.getElementById("radioPayeAfter");
+    var radio_payeNow   = document.getElementById("radioPayNow");
+    var paypal = document.getElementById("paypal_payment");
+
+
+    radio_payeNow.onclick = function() {
+           /*on hide le button et on affiche paypal*/
+           payeAfter.style.display = "none";
+            if (paypal.style.display === "none") {
+              paypal.style.display = "block";
+            } else {
+              paypal.style.display = "none";
+            }
+    }
+    radio_payeAfter.onclick = function() {
+          /*on afiche le button et on hide paypal*/
+           payeAfter.style.display   = "block"; 
+           paypal.style.display = "none";
+        
+          /* if (x.style.display === "block") {
+              x.style.display = "none";
+            } else {
+              x.style.display = "block";
+            }*/
+    }
+  
+})
+
+
+ /***************BUTTON SUIVANT***********/
+    var rdvForm_hide   = document.getElementById("rdv-form-hide");
+
+
+ $('#btn-suivant1').on("click", function(){
+  let valid = true;
+  $('[required]').each(function() {
+    if ($(this).is(':invalid') || !$(this).val()) valid = false;
+  })
+  if (!valid) alert("ERREURE : Tous les champs doivent être remplies.");
+  else {
+          rdvForm_hide.style.display ="block";
+
+  };
+})
+
+</script>
+
+
+
+</html>

@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+
+{% load static %}
+{% include 'navbar.html' %}
+
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+<html>
+<head>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	
+	<title>Clinique Sainte Bernadette</title>
+  <!-- lien BS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- lien icones -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<title>Clinique Sainte Bernadette</title>
+
+
+    <!-- icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+  <!-- Custom styles for our template -->
+  <link  type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}" media="screen" >
+  <link  type="text/css" rel="stylesheet" href="{% static 'css/main.css' %}">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter&family=Mukta:wght@200;300&display=swap" rel="stylesheet">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- semantic UI -->
+    <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>   
+
+<body  class="body-background-color">
+
+
+<div  class="body-patient">
+<div class="container">
+      <h4 class="titre" id="welcomePagePatient" style="color: black;">Gestionnaire des ressources</h4>
+      <div id='alert-box'></div>
+      <div id='alert-box2'>
+
+               {%for field in account_form%}
+                    {%for error in field.errors%}
+                      <div class="alert alert-danger" role="alert" >
+                        <p>{{error}}</p>
+                      </div>
+                    {%endfor%}
+                  {%endfor%}
+
+                     {%if account_form.non_field_errors%}
+                    <div class="alert alert-danger" role="alert" >
+                      {{account_form.non_field_errors}}
+                    </div>
+                  {%endif%}
+                                  
+                      {%if messages %}
+                      <br><ul class="messages" id="messages" >
+                        {%for message in messages%}
+                          <div class="alert alert-success" role="alert" >
+                            {{message}}
+                          </div>                               
+                        {%endfor%}
+                      </ul>
+                    {%endif%} 
+                    </div>
+    <div class="main-body"> <br>
+
+          <div class="row gutters-sm">
+            <div class="col-md-3 mb-3">
+             
+            
+              <div class=" mt-3">
+                <ul class="list-group list-group-flush">
+                  <div  class="list-group" id="myList" role="tablist">
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#listeDocteurs" role="tab"><i class="fas fa-list-ul"></i>&nbsp;  Liste Docteurs</a>
+                    <a id="tabInput"  class="list-group-item list-group-item-action " data-toggle="list" href="#ajouterDocteurTab" role="tab"> <i class="fas fa-user-plus"></i>&nbsp;Ajouter un Docteur</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#creePostTab" role="tab"><i class="fas fa-folder-plus"></i>&nbsp; Ajouter un post</a>
+                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#creeHoraireRdv" role="tab"><i class="far fa-calendar-alt"></i>&nbsp; Créer un nouvel horaire de rdv</a>
+                   </div>
+                </ul>
+              </div><br>
+
+            </div>
+
+            <div class="col-md-9">
+              <div class="card mb-3">
+                <div class="card-body">
+                
+
+              <div class="tab-content">
+                <div class="tab-pane" id="creePostTab" role="tabpanel">
+                   <p class="patient-sousTitre " >  Ajouter un post</p><hr><br>  <p>Créer un nouveau post comme : dentiste, généraliste...</p><br>
+                    <div class="col-md-8">
+                         <form method="POST" id='createPost-form' >{% csrf_token %}
+                           <div class="form-group">
+                            <div class="col-sm-10">
+                              <input class="form-control" id="createPostDocteur-value" type="text" value="">
+                              <br><button type="submit" id="btnSubmit" class="mb-10"> Enregistrer</button><br>  
+
+                            </div>
+
+                          </div><br>  
+
+                       </form>
+                    </div><br>
+               
+                </div>
+                <div class="tab-pane" id="creeHoraireRdv" role="tabpanel">
+                   <h3 class="patient-sousTitre " >  Créer un nouvel horeaire de rendez-vous</h3><hr><br> 
+                   <p>Tout les champs sont obligatoires. L'horaire doit être au format : AAAA-MM-JJ.</p>
+                    <div class="col-md-8">
+                         <form method="POST" id='createPost-form' >{% csrf_token %}
+                           <div class="form-group">
+                            <div class="col-sm-10">
+                              {{formCreateHoraireRdv|crispy}}
+                              <br><button type="submit" id="btnSubmit" class="mb-10"> Enregistrer</button><br>  
+                              
+
+                            </div>
+
+                          </div><br>  
+
+                       </form>
+                    </div><br>
+               
+                </div>
+
+          <div class="tab-pane active" id="listeDocteurs" role="tabpanel">
+                   <p class="patient-sousTitre" > Liste Docteurs </p><hr>  <br>
+            <div class="row">
+              <div class="container">
+                <form method="GET" action="" id="search-form"  >
+
+                 <div class="col-sm-4">
+                  {% csrf_token %}<!--obligaoirelorsqu'on utilise un form, securise les données pour les envoyés dans la db-->
+                 <input class="form-control py-2 border-right-0 border" type="search" name="searchBarPatient" placeholder="Faire une recherche..." />
+
+                </div>
+                <div class="col-sm-4">
+                  <input class="btn" id="btnRecherche" type="submit" value="Rechercher" />
+                </div>
+
+                </form>
+               </div><!--fin col-sm-2-->     <br><br>
+                <div class="col-md-10">
+
+                    <div class="display_table">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#Id</th>
+                          <th>Nom & prénom</th>
+                          <th>Post</th>
+                          <th>Date </th>
+                          <th>Sexe </th>
+                          <th>Téléphone </th>
+                          <th>Adresse</th>   
+                          <th>Supprimer</th>                 
+              
+                        </tr>
+                      </thead>
+                      {% for docteur in query_listDocteur %}
+                      <tr>
+                        <td name='idDocteur'>{{docteur.id}}</td>
+                        <td><a href="{%url 'voirPostDocteur' docteur.id %}">{{docteur.nomDocteur}} {{docteur.prenomDocteur}}</a></td>
+                        <td><a href="{%url 'voirPostDocteur' docteur.id %}">Voir</a></td> 
+                        <td>{{docteur.dateNaissance}}</td> 
+                        <td>{{docteur.sexe}}</td> 
+                        <td>{{docteur.tel}}</td>
+                        <td>{{docteur.adresse}}</td>
+                        <td><a href="{%url 'delete_docteur' docteur.id %}"><img src="{%static 'images/delete.jpg'%}" style="width: 13px; height: 13px;"></a></td>
+
+                      </tr>
+                    {%endfor %}
+                    </table>
+              
+          </div>
+        </div> <!--fin col-sm-10-->
+      </div> <!--fin row-->
+
+
+                </div>
+                
+                  <div class="tab-pane" id="ajouterDocteurTab" role="tabpanel">
+                           <p class="patient-sousTitre" > Ajouter un nouveau Dr. </p><hr><br>
+                           <p style="font-size: 13px;">NB : Tout les champs marquer d'une étoile sont obligatoires.</p><br>
+                      <div class="col-md-8">
+                         <form method="POST" id="createDocteur-form" >{% csrf_token %}
+
+                                      
+
+                                        {{formCreateDocteur|crispy}}
+
+                                       
+
+                                      
+                            <br><button type="submit" id="btnSubmit" class="mb-10"> Enregistrer</button><br>  
+
+                       </form>
+                    </div><br>
+         
+  
+              </div>
+ 
+             
+             <br>
+
+          </div>
+        </div>
+    </div>
+
+
+
+ </div>
+</div>
+
+</body>
+
+
+<script type="text/javascript">
+
+  /*function pour effacer le message lorsqu'on click sur un élément*/
+ $("#tabInput").click(function(){
+  /*on clean le alertbox lorsqu'on clicque sur les tabs*/
+    const alertBox = document.getElementById('alert-box')
+
+      alertBox.innerHTML=""
+  });
+
+   
+  const createPostForm = document.getElementById('createPost-form')
+  const createDocteurForm = document.getElementById('createDocteur-form')
+  const csrf = document.getElementsByName('csrfmiddlewaretoken')
+
+
+  const alertBox = document.getElementById('alert-box')
+
+  createPostForm.addEventListener('submit', e=>{
+    e.preventDefault()
+
+    $.ajax({
+            type        : 'POST', 
+            url         : "/createPostDocteur/",
+            data       : {
+              'post': $('#createPostDocteur-value').val(),
+              'csrfmiddlewaretoken': csrf[0].value,
+            },
+            success : function(success){
+                     console.log((success));
+                     alertBox.innerHTML=`<div class="alert alert-success" role="alert">
+                     <h4>  <i class="fas fa-check fa-5" style="color:#2a9134; "></i>  Post créer avec succes, ` + $('#createPostDocteur-value').val() + ` </h4>
+                    </div>`
+                    
+        },
+            error : function(error){
+             alertBox.innerHTML=`<div class="alert alert-success" role="alert">
+                     <h4>  <i class="fas fa-check fa-5" style="color:#2a9134; "></i> Une erreure c'est produite. Réessayer </h4>
+                    </div>`                  
+        }
+    })
+  })
+
+  createDocteurForm.addEventListener('submit', e=>{
+    e.preventDefault()
+
+    $.ajax({
+            type        : 'POST', 
+            url         : "/createDocteur/",
+            data       : {
+              'nomDocteur': $('#inputNom').val(),
+              'prenomDocteur': $('#inputPrenom').val(),
+              'emailDocteur': $('#inputEmail').val(),
+              'birthDocteur': $('#inputDateNaissance').val(),
+              'telDocteur': $('#inputTel').val(),
+              'adresseDocteur': $('#inputAdresse').val(),
+              'csrfmiddlewaretoken': csrf[0].value,
+            },
+            success : function(success){
+                     console.log((success));
+                      alertBox.innerHTML=`<div class="alert alert-success" role="alert">
+                     <h4>  <i class="fas fa-check fa-5" style="color:#2a9134; "></i>  Dr. `  + $('#inputPrenom-value').val() +  ` créer avec succès   </h4>
+                    </div>`
+                    
+        },
+            error : function(error){
+             alertBox.innerHTML=`<div class="alert alert-success" role="alert">
+                     <h4>  <i class="fas fa-check fa-5" style="color:#2a9134; "></i> Une erreure c'est produite. Réessayer </h4>
+                    </div>`                  
+        }
+    })
+  })
+
+
+
+
+
+</script>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+</html>

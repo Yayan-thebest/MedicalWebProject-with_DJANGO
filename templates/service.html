@@ -1,0 +1,257 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <!--Permet de rendre la page responsive-->
+  <meta name="viewport" content="width=device-width initial-scale=1.0">
+
+  <title>Clinique Siante Bernadette</title>
+  <link  type="text/css" rel="stylesheet" href="{% static 'new-style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Lien pour les icones-->
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
+</head>
+<body>
+
+  <section class="sub-header">
+
+    <nav>
+      <a href="{% url 'acceuil' %}"><img src="{% static 'images/logo.png' %}"></a>
+      <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+
+        <ul>
+          <li><a href="{% url 'acceuil' %}">ACCEUIL</a></li>
+          <li><a href="{% url 'about' %}">A PROPOS</a></li>
+          <li><a href="{% url 'service' %}">SERVICES</a></li>
+          <li><a href="{% url 'contact' %}">CONTACT</a></li>
+        </ul>
+      </div>
+      <i class="fa fa-bars" onclick="showMenu()"></i>
+
+    </nav>
+    <h1>Exploration des services</h1>
+
+  </section>
+
+    <!--about us content-->
+
+  <section class="section-text-with-image">  
+    <div class="row">
+      <div class="section-text-with-image-col">
+      <div class="accordion">
+        <div class="accordion-item" id="cons1">
+          <a class="accordion-link" href="#cons1">
+            ANUSCOPIE-RECTOSCOPIE-COLOSCOPIE      
+            <i class="fa fa-plus" ></i>
+            <i class="fa fa-minus"></i>
+          </a>
+          <div class="answer">
+             <b> Nature de l’examen et But</b>
+                     <p>  Examen spécialisé en Gastro Entérologie (Maladies de l’Appareil Digestif )
+                        Cet examen grâce à un appareillage spécial, permet de visualiser tous les problèmes au niveau de l’anus et du rectum : Hémorroïdes externes, Hémorroïdes internes, Fissures anales, Abcès de l’anus, Saignements du rectum, infections et tumeurs de l’anus, du rectum et du colon.
+                     </p>
+                     <b> Public cible</b> <br>
+                     <p>Tout sujet ayant des problèmes du bas ventre, de l’anus, du rectum et du colon.</p>
+                     <b> Désagréments de l’examen</b>
+                     <br><p>Inconfort psychologique lors de l’examen. </p>
+                     <b> Prix : </b> <p></p>
+              
+          </div>
+          
+        </div>
+
+        <div class="accordion-item" id="cons2">
+          <a class="accordion-link" href="#cons2">
+            ELECTROCARDIOGRAPHIE (ECG)      
+            <i class="fa fa-plus"></i>
+            <i class="fa fa-minus"></i>
+          </a>
+          <div class="answer">
+             <b>Nature de l’examen et But </b>
+                   <p> Examen de routine en Médecine générale et en Cardiologie dont le but est d’explorer l’état du cœur. Cet examen grâce aux renseignements électriques  aboutit à la conclusion d’un cœur sain ou d’un cœur malade.</p>
+                   <b> Public cible</b><br>
+                   <p> Tout public, particulièrement le sujet actif : travailleur, sportif, 
+                      sujet désireux de se faire une idée sur l’état de son cœur.
+                   </p>
+                   <b> Désagréments de l’examen</b>
+                       <p> Aucun.</p>
+                       <b> Prix : </b>
+              
+          </div>
+          
+        </div>
+
+        <div class="accordion-item" id="cons3">
+          <a class="accordion-link" href="#cons3">
+            ECHOCARDIOGRAPHIE 
+            <i class="fa fa-plus"></i>
+            <i class="fa fa-minus"></i>
+          </a>
+          <div class="answer">
+             <b>Nature de l’examen et But </b>
+                     <p> Examen spécialisé en Cardiologie dont le but est de visualiser le cœur en «direct » sur un moniteur vidéo et étudier ses performances réelles. Plusieurs paramètres sont ainsi calculés et analysés.
+                        Cet examen grâce aux renseignements vidéo et mathématiques aboutit à la conclusion d’un cœur sain ou d’un cœur malade.
+                     </p>
+                     <b> Public cible</b>
+                     <p> Tout public, particulièrement le sujet actif : travailleur, sportif
+                        sujet désireux de se faire une idée sur l’état de son cœur.
+                        Sujet dont l’ECG a relevé des anomalies mineures ou majeures
+                     </p>
+                     <b> Désagréments de l’examen</b>
+                       <p> Aucun.</p>
+                       <b> Prix : </b>
+              
+          </div>          
+        </div>
+
+        <div class="accordion-item" id="cons4">
+          <a class="accordion-link" href="#cons4">
+                ECHOGRAPHIE GENERALE
+            <i class="fa fa-plus"></i>
+            <i class="fa fa-minus"></i>
+          </a>
+          <div class="answer">
+             <b> Nature de l’examen et But</b>
+                       <p> Examen de routine en médecine dont le but est d’explorer le corps. Cet examen grâce aux rayons X donne des images des parties du corps.<br>
+                       Grâce à la numérisation on obtient des images de taille reduite et de meilleures qualités.</p>
+                       
+                       <b> Public cible</b>                      
+                      <p> Tout public<br>
+                        Restriction pour la femme enceinte<br>
+                    </p>
+                       <b> Désagréments de l’examen</b>
+                       <p> Aucun.</p>
+                       <b> Prix : </b>
+              
+
+
+                       
+              
+          </div>          
+        </div>
+
+        <div class="accordion-item" id="cons5">
+          <a class="accordion-link" href="#cons5">
+                FIBROSCOPIE
+            <i class="fa fa-plus"></i>
+            <i class="fa fa-minus"></i>
+          </a>
+          <div class="answer">
+              <b>Nature de l’examen et But </b> 
+                   <p>Examen spécialisé en Gastro Entérologie (Maladies de l’Appareil Digestif )
+                      Cet examen grâce à une sonde introduite dans la bouche, permet de visualiser en direct l’œsophage, l’estomac et le duodénum à la recherche d’ulcères, gastrites ou tout autre problème digestif. 
+                   </p>
+                   <b> Public cible</b> 
+                   <p> Sujet ayant des problèmes avec leur «ventre » : mauvaise digestion, brûlures de l’estomac, remonté acide dans la bouche, difficulté d’avaler, douleurs à la consommation de certains aliments (piments, citron, oseille, vinaigre, poivre, alcool ) ou à la prise de certains médicaments (aspirine, anti-inflammatoires )
+                      Sujets désireux de se faire une idée sur l’état de leur tube digestif.
+                   </p>
+                   <b> Désagréments de l’examen</b>
+                   <br><p>Sensation désagréable lors du passage du tube au niveau de la gorge, <br>
+                    Persistence de l'anesthésie de la bouche et de la gorge après l'examen.</p>
+                    <b> Prix : </b> <p></p>
+              
+          </div>          
+        </div>
+
+        <div class="accordion-item" id="cons6">
+          <a class="accordion-link" href="#cons6">
+                FIBROSCAN
+            <i class="fa fa-plus"></i>
+            <i class="fa fa-minus"></i>
+          </a>
+          <div class="answer">
+            <b> Nature de l’examen et But</b><br>
+                <p>Examen spécialisée en hépatologie(maladie du foie). Cet examen grâce à une méthode non invasive permet d'explorer le foie en mesurant son degré de fibrose. Il n'exige aucune préparation spéciale.</p>
+                <b> Désagréments de l’examen</b>
+                       <p> Aucun.</p>
+                       <b> Prix : </b>
+              
+          </div>          
+        </div>
+
+        <div class="accordion-item" id="cons7">
+          <a class="accordion-link" href="#cons7">
+                RADIOGRAPHIE  (RX)
+            <i class="fa fa-plus"></i>
+            <i class="fa fa-minus"></i>
+          </a>
+          <div class="answer">
+            <b> Nature de l’examen et But</b>
+                       <p> Examen de routine en médecine dont le but est d’explorer le corps. Cet examen grâce aux rayons X donne des images des parties du corps.
+                       Grâce à la numérisation on obtient des images de taille reduite et de meilleures qualités.</p>
+
+
+                      <b> Public cible</b>                       
+                      <p> Tout public<br>
+                        Restriction pour la femme enceinte<br>
+                    </p>
+                       <b> Désagréments de l’examen</b>
+                       <p> Aucun.</p>
+                       <b> Prix : </b>
+              
+          </div>          
+        </div>
+
+
+
+
+
+      </div>
+      
+      </div>
+      <div class="section-text-with-image-col">
+            <h1 >Bon à savoir</h1><br>
+          <p > Certains de nos services sont disponibles uniquement sur rendez-vous et ont lieu une fois par mois. Le CMSB fourni des prestations médicales à l’ensemble de la population résidente mais aussi aux expatriés toute nationalité confondue.</p> <br><br>
+
+            <a  class="btn" href="{% url 'login' %}" >PRENDRE RDV</a>
+      </div>
+
+
+    </div>
+  </section>
+
+
+  
+  <!--Footer--> 
+  {% include 'footer.html' %}
+
+
+
+<!--TOUJOURS PLACER LE SCRIPT AVANT LA BALISE FERMANTE DU BODY-->
+
+<!--JS for toogle menu-->
+<script type="text/javascript">
+  var navLinks = document.getElementById("navLinks");
+
+  /*em css on a mi la valeur de nav-links(right :-200px) ici on le met a 0  lorsqu'on clique sur show*/
+  function showMenu(){
+    navLinks.style.right= "0";
+  }
+  /*et on le remet a -200 lorsqu'on clique sur hide*/
+  function hideMenu(){
+    navLinks.style.right= "-200px";
+  }
+
+
+
+</script>
+
+
+
+
+</body>
+
+
+</html>

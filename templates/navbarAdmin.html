@@ -1,0 +1,131 @@
+
+
+  {% load static %}
+
+
+<style>
+  nav{
+    background-color: ;
+  }
+  .hello-msg{
+    font-size: 25px;
+    color: #fff;
+    margin-right: 20px;
+  }
+  li a{
+    color: black;
+    font-size: 18px;
+    font-weight: ;
+  }
+  li a.hover{
+    color: #70d6ff;
+  }
+
+  .dropbtn {
+  background-color: #fff;
+  border:;
+  color: white;
+  padding: 12px;
+  font-size: 15px;
+  margin-top: 1px;
+  border-color: #ddd;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #ddd;}
+
+.navbar{
+  background-color: #fff;
+  border-bottom: 50px solid #ccc;
+}
+.navbar-header{
+  margin-left: 200px;
+}
+.navbar-collapse{
+    margin-right: 200px;
+}
+</style>
+
+
+  <div class="container">
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-fixed-top">
+
+        <div class="navbar-header">
+        <a href="{% url 'acceuil' %}">
+          <img src="{% static 'images/logo.svg' %}" style="width: 250px;">
+        </a>
+        </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right"> 
+ 
+      {% if request.user.is_staff %}     
+        
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'about' %}">Gestion patients</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'about' %}">Gestion Docteurs</a>
+      </li>
+      {% endif %}
+
+      {% if request.user.is_authenticated %}
+     
+
+      <div class="dropdown">
+        <button class="dropbtn">
+             <li class="nav-item ">
+               <a >{{request.user.prenom}}</a>
+            </li>
+        </button>
+        <div class="dropdown-content">
+
+          {% for group in  request.user.groups.all %}
+          {%  if 'Patient' == group.name %}
+             <li class="nav-item active">
+                <a class="nav-link" href="{% url 'patient' %}">Mon compte</a>
+             </li>   
+          {% endif %}
+          {% endfor %}
+          <a href="{% url 'logout' %}" style="color:#7d7c83;">Déconnexion <i class="fas fa-sign-out-alt"></i>  </a>
+
+        </div>
+      </div>
+      {%else%}
+        <li class="nav-item active">
+       <a href="{% url 'login' %}" style="color:#7d7c83;">Connexion </a>
+      </li>
+      {%endif%}
+      </ul>
+    </div><!--/.nav-collapse -->
+
+    </nav>
+</div>
+
+

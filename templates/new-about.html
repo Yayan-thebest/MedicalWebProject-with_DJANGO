@@ -1,0 +1,257 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!--Permet de rendre la page responsive-->
+	<meta name="viewport" content="width=device-width initial-scale=1.0">
+
+	<title>Clinique Siante Bernadette</title>
+	<link  type="text/css" rel="stylesheet" href="{% static 'new-style.css' %}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Lien pour les icones-->
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
+</head>
+<body>
+
+	<section class="sub-header">
+
+		<nav>
+			<a href="{% url 'acceuil' %}"><img src="{% static 'images/logo.png' %}"></a>
+			<div class="nav-links" id="navLinks">
+				<i class="fa fa-times" onclick="hideMenu()"></i>
+
+				<ul>
+					<li><a href="">ACCEUIL</a></li>
+					<li><a href="">A PROPOS</a></li>
+					<li><a href="">SERVICES</a></li>
+					<li><a href="">CONTACT</a></li>
+				</ul>
+			</div>
+			<i class="fa fa-bars" onclick="showMenu()"></i>
+
+		</nav>
+		<h1>A propos de nous</h1>
+
+	</section>
+
+		<!--about us content-->
+
+	<section class="section-text-wih-image">	
+		<div class="row">
+			<div class="section-text-wih-image-col">
+				<h1>	Historique</h1>
+				<p>Le cabinet Médical « Ste Bernadette » (CMSB) a vu le jour le 30 mars 1998 à Koudougou Elle est située au secteur 1 de Koudougou face à la cathédrale. « St Augustin ». Son promoteur est le Dr Casimir MONÉ, Médecin, inscrit à l’ordre des médecin du BF sous le n° 74 par ailleurs Enseignant vacataire à l’École Nationale de Santé Publique (ENSP) de Koudougou (BF).</p>
+                <p class="trois">Par ailleurs elle constitue un cadre privilégié de rencontre d’apprentissage pour les agents de santé, toute catégorie confondue d’ici et d’ailleurs. Ainsi la Clinique reçoit des infirmiers, des étudiants en Médecine et des médecins stagiaires. Elle a un partenariat avec l’Université Laval au Québec (Canada) et celui d'Ouagadougou où, une thèse de Doctorat d’État en médecine lui a été consacrée avec brio. </p>
+			</div>
+			<div class="section-text-wih-image-col">
+				<img  src="{% static 'images/19.jpg'%}">				
+			</div>
+
+
+		</div>
+	</section>
+
+
+	<!--5eme section-->
+	<section class="jumborton">
+		<h1>Certification</h1>
+		<p>Elle est reconnue par l’arrêté ministériel <em> n° 98 – 043 du 23/02/1998</em> et est membre fondateur de l’APROCLIB (Association des promoteurs de Cliniques Privées du Burkina).</p>
+	</section>
+
+	<section class="section-bloc-text">
+		<h2>
+			Disticntions & Reconnaissances 
+		</h2>
+
+		<div class="row">
+			<div class="section-bloc-text-col">
+				<h3><i class="fa fa-graduation-cap fa-5"></i></h3>
+				<p> Thèse de Doctorat d’Etat en Médecine soutenu à l’UFR Santé de l’Université de Ouagadougou:</p>
+			</div>
+			<div class="section-bloc-text-col">
+				<h3><i class="fa fa-user"></i></h3>
+				<p>Décoration et Certificat de reconnaissance de<em> l’Université Laval du Québec</em></p>
+
+			</div>
+			<div class="section-bloc-text-col">
+				<h3><i class="fa fa-certificate"></i></h3>
+				 <p> Décoration du Médecin fondateur(Dr Casimir Moné) au titre de Chevalier de l’Ordre Nationale </p>
+
+			</div>
+			<div class="section-bloc-text-col">
+				<h3><i class="fa fa-leanpub"></i></h3>
+				 <p> 
+                           <b> Articles de presse :</b><br>
+                             Journal le Pays</br>
+                             Journal Notre Santé</br>
+                             Journal l’Expansion</li>
+                        </p>
+			</div>
+		</div>
+		
+	</section>
+
+	<section class="section-bloc-text">
+		<h2>
+			Nos partenaires
+		</h2>
+		<p class="text-center partenaire">Depuis sa création, la clinique entretien une relation de partenariat avec de nombreuses institutions nationales et internationales.Des conventions la lie à la plupart d’entre elle.</p>
+
+		<div class="row">
+			<div class="section-bloc-text-col">
+				<img src="{% static 'images/sonabel.png'%}" class ="about-bloc3-img"> 
+
+			</div>
+			<div class="section-bloc-text-col">
+				<img src="{% static 'images/uba.png'%}" class="about-bloc3-img">            
+
+			</div>
+			<div class="section-bloc-text-col">
+				<img src="{% static 'images/30.jpg'%}" class="about-bloc3-img">            
+
+			</div>
+			<div class="section-bloc-text-col">
+				<img src="{% static 'images/axa1.png'%}" class="about-bloc3-img">            
+
+			</div>
+		</div>
+		<a href="#list-partenaire"  id="btn-voirPlus">Voir plus</a>     
+
+		<section class="section-text-wih-image" id="list-partenaire"  style="display:none ;">	
+			<div class="row">
+				<div class="section-text-wih-image-col">
+				  	<b> NATIONAUX</b> <br>
+	              	<p> 
+		               UFR/SS de l’Université Ouaga I JKZ<br>
+		               Ecole Nationale de Santé Publique<br>
+		               CNSS<br>
+		               Sonabel<br>
+		               Onatel<br>
+		               Sofitex<br>
+		               UBA<br>
+		               MCI Internationnal<br>
+		               BICIAB<br>
+		               Atlantic Bank<br>
+		               Fédération Burkinabé de Football<br>
+		               Eglise Catholique & Protestante<br>
+		               SITARAIL<br>
+		               Centre Socio sanitaire Oasis JB<br>
+		               Clinique Suka <br>
+		               Clinique Les Flamboyants<br>
+		               Clinique Notre Dame de la Paix<br>
+		               Polyclinique du Centre<br>
+		               Nantou Mining - Perkouan<br>
+		               Desimone - Perkouan  <br> 
+	                	<br><br>
+	                </p>
+					
+				</div>
+				<div class="section-text-wih-image-col">
+					<b> INTERNATIONAUX</b><br>
+	               <p>
+		               Université Laval au Québec<br>
+		               Ecole des Infirmier(e)s de Dreux<br> 
+		               Union Européenne<br>
+		               Ambassade de France<br>
+		               Ambassade des Pays Bas<br>
+		               Ambassade d’Angleterre<br>
+		               Ambassade du Canada<br>
+		               Ambassade des Pays Bas<br>
+		               Inter Mutuelles Assistance France<br>
+		               Mondiale Assistance France
+		               Caisse des Français de l’Etranger (CFE)<br>
+		               Axa Assistance France<br>
+		               Elvia Assistance Médicale<br>
+		               Fidelia Assistance France<br>
+		               OK Raid Monde<br>
+		               Croix Bleue (Blue Cross) Canada<br>
+		               EuroCross France<br>
+		               EuroCross Belgique<br>
+		               CEGA Medical Assistance U.K<br>
+		               Europe Assistance France et Belgique<br>
+	               </p>
+				</div>
+			</div>
+	</section>   
+
+	</section>
+
+	
+	<!--Footer-->	
+	{% include 'new-footer.html' %}
+
+
+
+<!--TOUJOURS PLACER LE SCRIPT AVANT LA BALISE FERMANTE DU BODY-->
+
+<!--JS for toogle menu-->
+<script type="text/javascript">
+	var navLinks = document.getElementById("navLinks");
+
+	/*em css on a mi la valeur de nav-links(right :-200px) ici on le met a 0  lorsqu'on clique sur show*/
+	function showMenu(){
+		navLinks.style.right= "0";
+	}
+	/*et on le remet a -200 lorsqu'on clique sur hide*/
+	function hideMenu(){
+		navLinks.style.right= "-200px";
+	}
+
+
+
+</script>
+
+
+<!--JS for hide and show-->
+<script type="text/javascript">
+
+/*Func JS pour afficher le button correspondant a la selection du radio button*/
+/*PS : souvent auqnd on utilise les function en y'a un bug, il faut cliquer 2fois par exemple
+sur les radios pour que sa*/
+
+
+ $(document).ready(function(){
+    //var payeNow = document.getElementById("btnPayeNow");
+    var voirPlus = document.getElementById("btn-voirPlus");
+
+    var list = document.getElementById("list-partenaire");
+
+     $('a[href*=\\#]:not([href=\\#])').on('click', function() {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.substr(1) +']');
+
+        if (list.style.display === "none") {
+              list.style.display = "block";
+            if (target.length) {
+	            $('html,body').animate({
+	                scrollTop: target.offset().top
+	            }, 1000);
+	            return false;
+        }
+
+        } else {
+              list.style.display = "none";
+        }
+        
+    });
+
+})
+
+</script>
+
+
+</body>
+
+
+</html>
